@@ -1,0 +1,2 @@
+# MagnetWorkbegin
+work from scratch

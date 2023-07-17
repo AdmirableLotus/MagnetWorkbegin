@@ -49,17 +49,13 @@ base_uri: public(String[128])
 contract_uri: String[128]
 
 # NFT Data
-ids_by_owner: HashMap[address, DynArray[uint256, MAX_SUPPLY]]
+ids_by_owner: HashMap[address, uint256[]]
 id_to_index: HashMap[uint256, uint256]
 token_count: uint256
 
-owned_tokens: HashMap[
-    uint256, address
-]  # @dev NFT ID to the address that owns it
+owned_tokens: HashMap[uint256, address]  # @dev NFT ID to the address that owns it
 token_approvals: HashMap[uint256, address]  # @dev NFT ID to approved address
-operator_approvals: HashMap[
-    address, HashMap[address, bool]
-]  # @dev Owner address to mapping of operator addresses
+operator_approvals: HashMap[address, HashMap[address, bool]]  # @dev Owner address to mapping of operator addresses
 
 # @dev Static list of supported ERC165 interface ids
 SUPPORTED_INTERFACES: constant(bytes4[5]) = [
@@ -103,13 +99,13 @@ def __init__(preminters: address[MAX_PREMINT]):
         self.al_mint_amount[msg.sender] += 1
         self.al_mint_started = True
 
-        for i in range(len(preminters)):
-            pre_minter: address = preminters[i]
-            token_id = self.token_count + 1
-            self.token_count = token_id
-            self._mint(pre_minter, token_id)
-            self.al_mint_amount[pre_minter] += 1
-            self.al_mint_started = True
+    for i in range(len(preminters)):
+        pre_minter: address = preminters[i]
+        token_id = self.token_count + 1
+        self.token_count = token_id
+        self._mint(pre_minter, token_id)
+        self.al_mint_amount[pre_minter] += 1
+        self.al_mint_started = True
 
 
 @external
@@ -201,3 +197,4 @@ def isApprovedForAll(owner: address, operator: address) -> bool:
     @notice Check if an operator is approved to manage all NFTs of an owner
     @param owner The owner of the NFTs
     @param operator The operator to check
+    @return True if the operator is approved for all N

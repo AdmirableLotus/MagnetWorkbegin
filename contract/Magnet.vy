@@ -1,3 +1,6 @@
+# version 0.3.7
+
+
 from vyper.interfaces import ERC20
 from vyper.interfaces import ERC165
 from vyper.interfaces import ERC721

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "hardhat": "^2.17.0",
     "viem": "^1.2.12"
   }
 }

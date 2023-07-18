@@ -1,1 +1,6 @@
 name: The Magnet
+
+plugins:
+ name: hardhat
+ name: vyper
+ name: solidity-coverage
